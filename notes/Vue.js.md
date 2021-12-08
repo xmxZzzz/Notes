@@ -562,7 +562,117 @@ MyPlugin.install=function(Vue,option){
 
 - 基本用法
 
+  *<b>vue-router</b>*的实现原理与`<component :is="currentCompnent"></component>`的通过 *<u>is</u>* 特性来实现动态组件类似。
 
+1. 通过*npm*安装*vue-router*
+
+   `npm install vue-router@2.3.1`
+
+2. 在*main.js*文件中使用`Vue.use()`加载插件
+
+   ```js
+   import VueRouter from 'vue-router';
+   Vue.use(VueRouter);
+   ```
+
+3. 针对*views/index.vue*和*views/about.vue*两个页面，在*main.js*文件中配置对应的**路由匹配列表**
+
+   ```js
+   //创建数组用来制定路由匹配列表，每一个路由映射一个组件
+   const Routers = [
+       {
+           //path: 指定当前匹配路径
+           path: '/index',
+           //component: 映射的组件
+           //异步实现的懒加载,好处是不需要在打开首页的时候就把所有的页面内容全部加载进去，只在访问时才加载
+           component: (resolve) => require(['./views/index.vue'], resolve)
+           //如果非要一次性加载
+           //component:require('./views/index.vue')
+       },
+       {
+           path: '/about',
+           component: (resolve) => require(['./views/about.vue'], resolve)
+       }
+   ]
+   ```
+
+   - **webpack会把Routers中的每一个路由都打包为一个js文件**，js文件又被叫作*<u>chunk</u>*（块），它们的<u>命名方式默认是0.main.js、1.main.js......</u>。可以在webpack配置的出口output处通过设置**chunkFilename**字段修改chunk命名。
+
+     ```
+     output:{
+     	publicPath:'/dist/',
+     	filename:'[name].js',
+     	chunkFilename:'[name].chunk.js'
+     }
+     ```
+
+     在请求到该页面时，才加载这个页面的js，也就是异步实现的懒加载（按需加载）。
+
+4. 完成路由配置和路由实例
+
+   ```js
+   const RouterConfig = {
+       //使用HTML5的History路由模式
+       mode: 'history',
+       routes: Routers
+   }
+   const router = new VueRouter(RouterConfig);
+   
+   new Vue({
+       //...
+       router: router,
+       //...
+   })
+   ```
+
+   - 不配置 *mode* 或者 `mode:'hash'` ，就会使用”==#==“来设置路径。
+   - 使用HTML5的History路由模式，通过”==/==“设置路径。开启*History*路由，在生产环境时服务端必须进行配置，将所有路由都指向同一个*html*，或设置404页面为该*html*，否则刷新时页面会出现404。
+
+5. *webpack-dev-server*也要配置下来支持*History*路由，在package.json文件中修改dev命令
+
+   ```json
+   //增加了--history-api-fallback，所有的路由都会指向index.html
+   script:{ 
+    "dev": "webpack-dev-server --open --history-api-fallback --config webpack.config.js",
+   }
+   ```
+
+
+6. 在根实例app.vue里添加一个路由视图`<router-view>`来挂载所有的路由组件。
+
+   ```vue
+   <template>
+     <div>
+         <!-- 添加路由视图来挂载所有的路由组件 -->
+         <router-view></router-view>
+     </div>
+   </template>
+      
+   <script>
+   export default {
+     
+   }
+   </script>
+   
+   <style scoped>
+   </style>
+   ```
+
+   - 运行网页时，`<router-view>`会根据当前路由动态渲染不同的页面组件。
+   - 网页中一些<u>公共部分</u>，比如顶部的导航栏、侧边导航栏、底部的版权信息，这些也可以写在app.vue里，与`<router-view>`同级。
+   - 路由切换时，切换的是`<router-view>`挂载的组件，其他的内容并不会改变。
+
+7. 运行`npm run dev`，分别访问 [127.0.0.1:8080/index](127.0.0.1:8080/index) 和 [127.0.0.1:8080/about](127.0.0.1:8080/about)，就可以看到这两个页面。
+
+   -  两个页面结构如下图所示，两个文件都通过`<script>`标签引入到*index.html*文件的`<header>`中
+
+     - <u>./views/index.vue</u>被打包为一个**0.main.js**文件
+
+       ![127.0.0.1:8080/index](C:\Users\10195\Desktop\笔记\Notes\images\Vue.js\router_index.png)
+
+     - ./views/about.vue</u>被打包为一个**1.main.js**文件。
+
+       ![127.0.0.1:8080/about](C:\Users\10195\Desktop\笔记\Notes\images\Vue.js\router_about.png)
 
 [^1]:当浏览器加载页面后看到的第一眼的显示内容为首屏。
 
