@@ -174,7 +174,66 @@ console.log(add(1,1)); // 2
   var timer = new Timer();
   ```
 
-  
+
+### 循环
+
+#### for... in
+
+<u>*es5*</u>标准，用来**遍历key值**，遍历对象和数组。
+
+```js
+// 遍历对象
+let obj = {
+  a: 1,
+  b: 2,
+  c: 3
+}
+for (let key in obj) {
+  console.log(key)
+}  // a  b  c
+
+// 遍历数组
+let arr = [1, 2, 3]
+for (let key in arr) {
+  console.log(key)
+}  // 0  1  2
+```
+
+#### for...of
+
+<u>*es6*</u>标准，用来**遍历value值**，遍历数组，不能遍历普通对象[^1]。
+
+```js
+// 遍历数组
+let arr = [1, 2, 3]
+for (let value of arr) {
+  console.log(value)
+}  // 1  2  3
+```
+
+## substr()
+
+- substr() 方法可在字符串中抽取从 *start* 下标开始的指定数目的字符。<u>（左包含，右不包含）</u>
+
+- 语法
+
+  ```js
+  stringObject.substr(start,length)
+  ```
+
+  | 参数     | 描述                                                         |
+  | :------- | :----------------------------------------------------------- |
+  | *start*  | 必需。要抽取的子串的起始下标。必须是数值。如果是负数，那么该参数声明从字符串的尾部开始算起的位置。也就是说，-1 指字符串中最后一个字符，-2 指倒数第二个字符，以此类推。 |
+  | *length* | 可选。子串中的字符数。必须是数值。如果省略了该参数，那么返回从 *stringObject* 的开始位置到结尾的字串。 |
+
+## native修饰符
+
+```vue
+ <Item @click.native="handleClick(item.id)"></Item>
+```
+
+- 当不加`.native`修饰符时，默认是监听来自自定义组件*Item*组件的<u>**自定义事件**</u>。
+- 当加上`.native`修饰符，监听的是点击Item组件时触发的**<u>原生click事件</u>**。
 
 # CSS3
 
@@ -348,6 +407,172 @@ console.log(add(1,1)); // 2
   | *color*    | 可选。阴影的颜色。在[CSS颜色值](https://www.runoob.com/cssref/css_colors_legal.aspx)寻找颜色值的完整列表 |
   | inset      | 可选。从外层的阴影（开始时）改变阴影内侧阴影                 |
 
+[aaaa](http://en.wikipedia.org/wiki/Cross-site_request_forgery)
+
+### 2.9 overflow
+
+- 规定当内容溢出元素框时发生的事情
+
+- 常用值
+
+  | 值      | 描述                                                     |
+  | :------ | :------------------------------------------------------- |
+  | visible | 默认值。内容不会被修剪，会呈现在元素框之外。             |
+  | hidden  | 内容会被修剪，并且其余内容是不可见的。                   |
+  | scroll  | 内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。 |
+  | auto    | 如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。 |
+  | inherit | 规定应该从父元素继承 overflow 属性的值。                 |
+
+### 2.10 text-decoration
+
+- text-decoration 属性规定添加到文本的修饰。
+
+- 可能的值
+
+  | 值           | 描述                                            |
+  | :----------- | :---------------------------------------------- |
+  | none         | 默认。定义标准的文本。                          |
+  | underline    | 定义文本下的一条线。                            |
+  | overline     | 定义文本上的一条线。                            |
+  | line-through | 定义穿过文本下的一条线。                        |
+  | blink        | 定义闪烁的文本。                                |
+  | inherit      | 规定应该从父元素继承 text-decoration 属性的值。 |
+
+# Ajax、jQuery和Axios
+
+## Ajax简介
+
+- 全称：Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）
+- 描述一种使用现有技术集合的"新"方法，包括：<u>*HTML 或 XHTML、CSS、JavaScript、DOM、XML、XSLT， 以及最重要的 **XMLHttpRequest***</u>。
+
+- 最大的<u>优点</u>是：==在不重新加载整个页面的情况下，可以与服务器交换数据并更新部分网页内容。==
+
+- 不需要任何浏览器插件，但需要用户允许*JavaScript*在浏览器上执行。
+
+## jQuery简介
+
+- jQuery是一个快速、简洁的 *JavaScript框架*，是继[Prototype](https://baike.baidu.com/item/Prototype/14335188)之后又一个优秀的JavaScript代码库（框架）于2006年1月由[John Resig](https://baike.baidu.com/item/John Resig/6336344)发布。
+- jQuery设计的宗旨是==“write Less，Do More”==，即倡导写更少的代码，做更多的事情。它封装*JavaScript*常用的功能代码，提供一种简便的 <u>JavaScript设计模式</u>，优化*HTML*文档操作、事件处理、动画设计和*Ajax*交互。
+- jQuery的**<u>核心特性</u>**可以总结为：
+  - 具有独特的链式语法和短小清晰的多功能接口；
+  - 具有高效灵活的CSS选择器，并且可对CSS选择器进行扩展；
+  - 拥有便捷的插件扩展机制和丰富的插件。
+- jQuery兼容各种主流浏览器，如IE 6.0+、FF 1.5+、Safari 2.0+、Opera 9.0+等。
+
+## Axios简介
+
+- Axios 是一个基于 ***promise*** 的*HTTP库*，可以用在浏览器和 node.js 中。
+- 特性
+  - 从浏览器中创建 [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
+  - 从 node.js 创建 [http](http://nodejs.org/api/http.html) 请求
+  - 支持 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
+  - 拦截请求和响应
+  - 转换请求数据和响应数据
+  - 取消请求
+  - 自动转换 JSON 数据
+  - 客户端支持防御 [XSRF
+
+## jQuery和Axios对Ajax的封装的区别
+
+### Ajax
+
+```js
+//创建异步对象  
+var xhr = new XMLHttpRequest();
+//设置请求基本信息，并加上请求头
+xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xhr.open('post', 'test.php' );
+//发送请求
+xhr.send('name=Lan&age=18');
+xhr.onreadystatechange = function () {
+    // 这步为判断服务器是否正确响应
+    if (xhr.readyState == 4 && xhr.status == 200) {
+        console.log(xhr.responseText);
+    } 
+};
+```
+
+- **优点**：局部更新；原生支持
+- **缺点**：可能破坏浏览器后退功能；嵌套回调
+- 详细示例可参考下文的[Vue-插件](#ajax)
+
+### jQuery
+
+实现了对ajax技术的封装，但是jQuery主要是对原生JavaScript进行封装，封装了js三大核心要素：ECMAScript、DOM、BOM，所以说jQuery封装的ajax只是其中的一小部分，如果通过引用jQuery来进行ajax交互实在是显得有所浪费资源。
+
+```js
+$.ajax({
+   type: 'POST',
+   url: url,
+   data: data,
+   dataType: dataType,
+   success: function () {},
+   error: function () {}
+});
+```
+
+- **<u>缺点</u>**
+
+  - 本身是针对MVC的编程,不符合现在前端MVVM的浪潮
+
+  - 基于原生的XHR开发，XHR本身的架构不清晰，已经有了fetch的替代方案
+
+  - JQuery整个项目太大，单纯使用ajax却要引入整个JQuery非常的不合理（采取个性化打包的方案又不能享受CDN服务）
+
+### axios
+
+#### 简介
+
+通过promise技术实现对ajax实现的一种封装，符合最新的ES规范。本身上来说axios就是ajax，但是ajax却不单单只是axios。
+
+#### 示例
+
+```js
+axios({
+    method: 'post',
+    url: '/user/12345',
+    data: {
+        firstName: 'Fred',
+        lastName: 'Flintstone'
+    }
+})
+.then(function (response) {
+    console.log(response);
+})
+.catch(function (error) {
+    console.log(error);
+});
+```
+
+#### axios常用语法
+
+| nam                               | value                               |
+| --------------------------------- | ----------------------------------- |
+| axios(config)                     | 通用/最本质的发任意类型请求的方式   |
+| axios(url[,config])               | 可以只指定url发get请求              |
+| axios.request(config)             | 等同于axios(config)                 |
+| axios.get(url[,config])           | 发get请求                           |
+| axios.delete(url[,config])        | 发delete请求                        |
+| axios.post(url[,data,config])     | 发post请求                          |
+| axios.put(url[,data,config])      | 发put请求                           |
+| axios.defaults.xxx                | 请求非默认全局配置                  |
+| axios.interceptors.request.use()  | 添加请求拦截器                      |
+| axios.interceptors.response.use() | 添加响应拦截器                      |
+| axios.create([config])            | 创建一个新的axios(他没有下面的功能) |
+| axios.Cancel()                    | 用于创建取消请求的错误对象          |
+| axios.CancelToken()               | 用于创建取消请求的token对象         |
+| axios.isCancel()                  | 是否是一个取消请求的错误            |
+| axios.all(promise)                | 用于批量执行多个异步请求            |
+
+【补充说明】
+
+- `axios.create(config)`： 对axios请求进行二次封装
+  - 根据指定配置创建一个新的 axios ,也就是每个axios 都有自己的配置
+  - 新的 axios 只是没有 **取消请求** 和 **批量请求** 的方法，其它所有语法都是一致的
+  - 为什么要这种语法？
+    - <u>需求</u>，项目中有部分接口需要的配置与另一部分接口的配置不太一样
+    - <u>解决</u>：创建2个新的 axios ，每个都有自己的配置，分别对应不同要求的接口请求中
+
 # Vue
 
 ## 1.v-model
@@ -394,7 +619,7 @@ export interface VNode {
 }
 ```
 
-- 其中`data`的类型`VNodeData`的代码如下:
+- 其中`data`的类型`VNodeData`的代码如下: 
 
   ```js
   export interface VNodeData { 
@@ -540,7 +765,7 @@ MyPlugin.install=function(Vue,option){
 - 针对上述缺点，也就有了==前后端分离的开发模式==，后端只提供*API*来返回数据，前端通过*ajax*来获取数据后，再用一定的方式渲染到页面里。
 
   - <u>优点</u>：前后端做的事情分得很清楚，后端专注在数据上，前端专注再交互和可视化上。
-  - <u>缺点</u>：首屏[^1]渲染需要时间来加载*css*和*js*。
+  - <u>缺点</u>：首屏[^2]渲染需要时间来加载*css*和*js*。
 
   <u>*SPA*就是在前后端分离的基础上，加一层前端路由。</u>
 
@@ -548,21 +773,26 @@ MyPlugin.install=function(Vue,option){
 
 即由前端来维护一个路由规则。
 
-- 有两种实现方式
-  - 一种是利用*url*的*hash*，就是常说的<u>锚点（#）</u>。*JavaScript*通过*hashChange*事件来监听*url*的变化，*IE7*及以下需要用轮询。	
-  - 另一种就是==*HTML5*的*History*模式==。它使url看起来像普通网站那样，以”/“分割，没有”#“，但页面并没有跳转，不过使用这种模式需要服务端支持，服务端在接收到所有的请求后，都执行同一个html文件，不然会出现404。因此，**SPA只有一个*html***，整个网站所有的内容都在这一个*html*里，通过*JavaScript*来处理。
-- 优点
-  - 页面持久性：例如在播放音乐的同时跳转到另一个页面，而音乐没有中断
-  - 前端后彻底分离
-- 框架
-  - 通用的框架：Director
-  - 具体的框架：*Angular*的*ngRouter*，*React*的*ReactRouter*，以及==*Vue*的*vue-router*==。
+##### 有两种实现方式
+
+- 一种是利用*url*的*hash*，就是常说的<u>锚点（#）</u>。*JavaScript*通过*hashChange*事件来监听*url*的变化，*IE7*及以下需要用轮询。	
+- 另一种就是==*HTML5*的*History*模式==。它使url看起来像普通网站那样，以”/“分割，没有”#“，但页面并没有跳转，不过使用这种模式需要服务端支持，服务端在接收到所有的请求后，都执行同一个html文件，不然会出现404。因此，**SPA只有一个*html***，整个网站所有的内容都在这一个*html*里，通过*JavaScript*来处理。
+
+##### 优点
+
+- 页面持久性：例如在播放音乐的同时跳转到另一个页面，而音乐没有中断
+- 前端后彻底分离
+
+##### 框架
+
+- 通用的框架：Director
+- 具体的框架：*Angular*的*ngRouter*，*React*的*ReactRouter*，以及==*Vue*的*vue-router*==。
 
 #### vue-router
 
-- 基本用法
+##### 基本用法
 
-  *<b>vue-router</b>*的实现原理与`<component :is="currentCompnent"></component>`的通过 *<u>is</u>* 特性来实现动态组件类似。
+*<b>vue-router</b>*的实现原理与`<component :is="currentCompnent"></component>`的通过 *<u>is</u>* 特性来实现动态组件类似。
 
 1. 通过*npm*安装*vue-router*
 
@@ -592,6 +822,16 @@ MyPlugin.install=function(Vue,option){
        {
            path: '/about',
            component: (resolve) => require(['./views/about.vue'], resolve)
+       },
+        //动态路由，配置动态id
+       {
+           path: '/user/:id',
+           component: (resolve) => require(['./views/user.vue'], resolve)
+       },
+       //当访问的路径不存在时，重定向到首页
+       {
+           path: '*',
+           redirect: '/index'
        }
    ]
    ```
@@ -607,6 +847,31 @@ MyPlugin.install=function(Vue,option){
      ```
 
      在请求到该页面时，才加载这个页面的js，也就是异步实现的懒加载（按需加载）。
+
+   - **动态路由**：路由的一部分是固定的，一部分是动态的：`/user/123456`，其中用户*id* "123456"就是动态的，但它们路由到同一个页面。
+
+     ```vue
+     <template>
+         <div>
+             {{$route.params.id}}
+         </div>    
+     </template>
+     <script>
+     export default {
+         mounted(){
+             //this.$route可以访问到当前路由的信息
+             console.log(this.$route.params.id);
+         }
+     }
+     </script>
+     <style scoped>
+     
+     </style>
+     ```
+
+     - 打开[127.0.0.1:8080/user/123456](127.0.0.1:8080/user/123456)，如图所示。
+
+       ![动态路由](C:\Users\10195\Desktop\笔记\Notes\images\Vue.js\动态路由.png)
 
 4. 完成路由配置和路由实例
 
@@ -674,7 +939,790 @@ MyPlugin.install=function(Vue,option){
 
        ![127.0.0.1:8080/about](C:\Users\10195\Desktop\笔记\Notes\images\Vue.js\router_about.png)
 
-[^1]:当浏览器加载页面后看到的第一眼的显示内容为首屏。
+##### 跳转
+
+###### **vue-router**有两种跳转方式：
+
+1. 使用内置的`<router-link>`组件，它会被渲染为一个`<a>`标签。
+
+​			` <router-link to="/about">跳转到about</router-link>`
+
+- 使用`<router-link>`，在HTML5的History模式下会拦截点击，避免浏览器重新加载页面。
+
+- 其它属性：
+
+  - <u>tag</u>：指定渲染的标签。`<router-link tag="li" to="/about">`渲染的结果就是`<li>`。
+
+  - <u>replace</u>：使用replace不会留下History记录。所以导航后不能用后退键返回上一个页面。
+
+    ​	`<router-link to="/ablout" replace>`
+
+  - <u>active-class</u>：当`<router-link>`对应的路由匹配成功时，会自动给当前元素设置一个名为`router-link-active`的*class*，设置`prop:active-class`可以修改默认的名称。在做类似导航栏时，可以使用该功能高亮显示当前页面对应的导航菜单项，但是一般不会修改*active-class*，直接使用默认值*router-link-active*就可以。
+
+2. 使用`this.$router.push(path)`实现在*JavaScript*中运行跳转页面。
+
+   ```vue
+   <template>
+       <div>
+           <h1>介绍页</h1>
+           <button @click="handleRouter">跳转到user</button>
+       </div>
+   </template>
+   <script>
+   export default {
+       methods:{
+           handleRouter(){
+               this.$router.push("/user/123");
+           }
+       }
+   }
+   </script>
+   <style scoped>
+   
+   </style>
+   ```
+
+   - <u>**$router**</u> 还有一些其它的方法
+
+     - <u>replace</u>：类似于`<router-link>`中的`replace`功能，它不会向history添加新纪录，而是替换掉当前的*history*。	
+
+       ​	`this.$router.replace('/user/123');`。	
+
+     - <u>go</u>：类似于`window.history.go()`，在*history*记录中向前或者后退多少步，参数是整数。
+
+       ```js
+       //后退一页
+       this.$router.go(-1)	;
+       //前进两页
+       this.$router.go(2);
+       ```
+
+##### 高级用法
+
+- 导航钩子`beforeEach`和`afterEach`在**<u>路由即将改变前</u>** 和 **<u>改变后</u>** 触发。
+
+  - 导航钩子有3个参数
+
+    - <u>**to**</u>：即将要进入的目标的路由对象
+    - <u>**from**</u>：当前导航即将要离开的路由对象
+    - <u>**next**</u>：调用完该方法后，才能进入下一个钩子
+
+  - <u>示例1</u>：实现对页面标题的修改
+
+    - 在路由中自定义信息
+
+      ```js
+      const Routers = [
+          {
+              path: '/index',
+              meta: {
+                  title: '首页'
+              },
+              component: (resolve) => require(['./views/index.vue'], resolve)
+          },
+          //...
+      ];
+      ```
+
+    - 通过钩子函数`beforeEach`实现标题的设置
+
+      ```js
+      //在路由即将改变时，设置标题
+      router.beforeEach((to, from, next) => {
+          //修改index.html的标题
+          window.document.title = to.meta.title;
+          next();
+      })
+      ```
+
+  - <u>示例2</u>：校验是否登录
+
+    ```js
+    //如果登录了就可以访问，否则跳转到登录页面
+    router.beforeEach((to, from, next) => {
+        if (window.localStorage.getItem('token')) {
+            next();
+        } else {
+            next('/login');
+        }
+    }
+    ```
+
+    - <u>**next()**</u>的参数设置为*false*时，可以取消导航，设置为具体的路径可以导航到指定的页面。
+
+  - <u>示例3</u>：解决滚动条位置的问题
+
+    ```js
+    //解决前一个页面的滚动条在中间位置，导致跳转页面后，滚动条位置不变的问题router.afterEach((to, from) => {
+    router.afterEach((to, from) => {
+        window.scrollTo(0, 0);
+    })
+    ```
+
+### 状态管理与Vuex
+
+#### 概述
+
+- **<u>Vuex</u>** 解决的问题与**中央事件总线（bus）**类似，它作为*Vue*的一个插件来使用，可以更好地管理和维护整个项目的组件状态。
+
+- 在实际业务中，经常有==**跨组件共享数据的需求**==，因此***Vuex***的设计就是用来统一管理组件状态的，它定义了一系列规范来使用和操作数据，使组件应用更加高效。
+
+- 使用*Vuex*有一定的<u>要求</u>：主要使用场景时==**大型单页应用**==，更适合多人协同开发。
+
+#### Vuex基本用法
+
+##### 步骤
+
+1. 使用*npm*安装vuex
+
+   `npm install vuex@2.2.1`
+
+2. 在main.js中配置支持使用*Vuex*
+
+   ```js
+   import Vuex from 'vuex';
+   
+   Vue.use(Vuex);
+   
+   const store = new Vuex.Store({
+       //vuex的配置
+   });
+   
+   new Vue({
+       el:'#app',
+       router:router,
+       //使用vuex
+       store:store,
+       //...
+   })
+   ```
+
+仓库*store*包含了应用的数据（状态）和操作过程。Vuex里的数据都是响应式的，任何组件使用同一*store*的数据时，只要*store*的数据变化，对应的组件也会立即更新。
+
+##### 详细配置
+
+###### state
+
+- 据保存在*Vuex* 选项的==<u>state</u>==字段内。
+
+  ```js
+  //main.js
+  const store = new Vuex.Store({
+      //vuex配置
+      //数据保存在state字段内
+      state: {
+          count: 0
+      },
+  });
+  ```
+
+-  在任何组件内，可以直接通过`$store.state.var`读取到变量*count*。
+
+  ```vue
+  //index.vue
+  <template>
+      <div>
+          <!--{{$store.state.count}}-->
+          <!--使用计算属性实现-->
+          {{acount}}
+      </div>
+  </template>
+  <script>
+  
+  <script>
+  export default {
+      computed:{
+          count:function(){
+              return this.$store.state.count;
+          }
+      },
+  }
+  </script>
+  ```
+
+​		<u>*此时变量只能读取，不能手动改变。*</u>
+
+###### mutations
+
+- ==mutations==用来直接修改**state**里的数据。
+
+  ```js
+  const store = new Vuex.Store({
+       state: {
+          count: 0
+      },
+      
+      //支持直接修改state里的数据，第一个参数固定是state
+      mutations: {
+          increment(state) {
+              state.count++;
+          },
+          decrease(state) {
+              state.count--;
+          },
+          //支持接受第二个参数，可以是数字、字符串或对象等类型
+          //指定每次增加n，默认是2
+          increment1(state, n = 2) {
+              state.count += n;
+          },
+          //接受的param是一个对象
+          decrease1(state, param) {
+              state.count -= param.count;
+          }
+      }
+  })
+  ```
+
+- 在任何组件中，可以通过使用$store.commit`直接调用*mutations*里的方法实现修改数据。
+
+  ```vue
+  <template>
+      <div>
+          <h2>{{count}}</h2>
+          <button @click="handleIncrease">+1</button>
+          <button @click="handleDecrease">-1</button> 
+          <button @click="handleIncreaseMore">+5</button>
+          <button @click="handleDecreaseMore">-5</button>
+      </div>
+  </template>
+  <script>
+  export default {
+      computed:{
+          count:function(){
+              return this.$store.state.count;
+          }
+      },
+      methods:{
+          handleIncrease(){
+              this.$store.commit("increment");
+          },
+          handleDecrease(){
+              this.$store.commit("decrease");
+          },
+          //方法一：直接传递第二个参数
+          handleIncreaseMore(){
+              this.$store.commit("increment1",5);
+          },
+           //方法二：直接使用包含type属性的对象作为参数
+          handleDecreaseMore(){
+              this.$store.commit({
+                  type:'decrease1', //mumations的方法名
+                  count:5     //要传递的参数
+              })
+          }
+      }
+  }
+  </script>	
+  ```
+
+​	【注意】<u>*mutations*里尽量不要异步操作数据。</u> 如果异步操作数据里，组件在`commit`后，数据不能立即改变，而且不知道什么时候会改变。
+
+###### actions
+
+- **<u>actions</u>**和**mutations**h很像，不同的是==*action*里面提交的是*mutation*，并且可以异步操作业务逻辑==。
+
+  ```js
+  const store = new Vuex.Store({
+       state: {
+          count: 0
+      },
+      
+      //支持直接修改state里的数据，第一个参数固定是state
+      mutations: {
+          increment1(state, n = 2) {
+              state.count += n;
+          },
+      },
+  	actions: {
+          //使用action来加2
+          increment(context) {
+              context.commit('increment1');
+          },,
+          //异步：使用一个Promise在1s后提交mutation，即1s后count更新
+          asyncIncrement(context) {
+              return new Promise(resolve => {
+                  setTimeout(() => {
+                      context.commit('increment1');
+                  }, 1000)
+              });
+          }
+      },
+  }
+  ```
+
+- *action*在组件中通过`$store.dispatch`触发
+
+  ```vue
+  <template>
+      <div>
+          <p>测试Vuex中的actions</p>
+          <h2>{{aCount}}</h2>
+          <button @click="handleActionIncrease">action+2</button>
+          <button @click="handleAsyncActionIncrease">async+2</button>
+      </div>
+  </template>
+  <script>
+  export default {
+      computed:{
+          aCount:function(){
+              return this.$store.state.count;
+          },
+      },
+      methods:{
+          //通过调用actions中的increment()实现count+2
+          handleActionIncrease(){
+              this.$store.dispatch('increment');
+          }，  
+          //触发actions中的异步方法asyncIncrement
+          //现象：点击按钮后，count会在1s后更新
+          handleAsyncActionIncrease(){
+              this.$store.dispatch('asyncIncrement').then(()=>{
+                  console.log(this.$store.state.count);
+              })
+          }
+      }
+  }
+  </script>
+  ```
+
+  - <u>开发者约定</u>：涉及改变数据的，就使用***mutations***；存在业务逻辑的，就用***actions***。
+
+###### getters
+
+- ==getter==在不改变原数据的基础上，为所有组件提供处理后的新数据
+
+  ```js
+  const store = new Vuex.Store({
+      //...
+  	getters: {
+          //返回list数组中所有小于10的数据
+          filteredList(state) {
+              return state.list.filter(item => item < 10);
+          }，
+          //第二次参数可以是其它的getters方法，
+          //返回上述过滤后的数组中的元素个数
+          listCount: (state, getters) => {
+              return getters.filteredList.length;
+          }
+      }
+  }
+  ```
+
+- 在需要的组件中直接使用getters对应方法
+
+  ```vue
+  <template>
+    <p>测试Vuex中的getter</p>
+    <h2>{{list}}</h2>
+    <h2>{{listCount}}</h2>
+  </template>
+  <script>
+  export default {
+      computed:{
+          //对于Vuex中的list数据，只获取其中小于10的数据
+          list(){
+              //getters方法，当其它组件也需要过滤后的数据时,直接调用
+              return this.$store.getters.filteredList;
+          }，
+           //返回过滤后的list长度
+          listCount:function(){
+              return this.$store.getters.listCount;
+          }
+      },
+  }
+  </script>
+                                                                  
+  ```
+
+###### modules
+
+- ==用于将store分隔到不同模块。==当项目足够大时，*store*里的*state*、*mutations*、*actions*、*getters*会非常多，都放在*main.js*里显得不是很友好，使用*modules*可以把它们写进不同的文件中。每个*module*拥有自己的*state*、*mutations*、*actions*、*getters*而且可以多层嵌套。
+
+  ```js
+  const moduleA={
+      state:{},
+      mutations:{},
+      actions:{},
+      getters:{}
+  };
+  const moduleB={
+      state:{},
+      mutations:{},
+      actions:{},
+      getters:{}
+  };
+  
+  const store = new Vuex.Store({
+      modules:{
+          a:moduleA,
+          b:muduleB
+      }
+  });
+  
+  ```
+
+- <u>**传统方式**</u>调用子模块中的状态和方法
+
+  - state
+
+    ```
+    //this.$store.state['模块名']['属性名']
+    this.$store.state.a.count //moduleA的状态 
+    ```
+
+  - actions
+
+    ```
+    //this.$store.dispatch('模块名/属性名', opts)
+    this.$store.dispatch('a/increment',5)
+    ```
+
+  - getters
+
+    ```
+    //this.$store.getters.模块对应的属性名
+    this.$store.getters.sumCount
+    
+    //当多个模块的getters存在重名属性时，控制台可以看到一个错误信息：
+    //	[vuex] duplicate getter key : xxx
+    ```
+
+  - mutations
+
+    ```
+    //this.$store.commit('模块对应的属性名')
+    this.$store.commit('incrementA')
+    
+    //当子模块和根模块的mutation同名时，则会先执行根模块，然后按照子模块在modules定义的顺序依次执行
+    ```
+
+  ***module*** 的*mutation*和*getter* 接收的第一个参数*state*是当前模块的状态。在*actions*和*getters*中，还可以接收一个参数<u>*rootState*</u>，来访问根节点的状态。
+
+### 实战1：中央事件总线插件vue-bus
+
+1. <u>***vue-bus***</u> 插件像*vue-router*和*Vuex* 一样，给*Vue* 添加一个属性*<u>$bus</u>*，并代理*<u>$emit</u>*、*<u>$on</u>*、*<u>$off</u>* 三个方法。
+
+   ```js
+   const install = function (Vue) {
+       const Bus = new Vue({
+           methods: {
+               emit(event, ...args) {
+                   this.$emit(event, ...args);
+               },
+               on(event, callback) {
+                   this.$on(event, callback);
+               },
+               off(event, callback) {
+                   this.$off(event, callback);
+               }
+           }
+       });
+       Vue.prototype.$bus = Bus;
+   };
+   export default install;
+   ```
+
+​	**【补充】**
+
+- `vm.$on( event, callback )`
+
+  监听当前实例上的自定义事件。事件可以由`vm.$emit`触发。回调函数*callback*会接收所有传入事件触发函数的额外参数。
+
+- `vm.$emit( event, […args] )`
+
+​		触发当前实例上的事件。附加参数都会传给监听器回调，如果没有参数，形式为vm.$emit(event)
+
+- `vm.$off( [event, callback] )`
+
+​		移除自定义事件监听器。如果没有提供参数，则移除所有的事件监听器；
+
+​			1） 如果只提供了事件，则移除该事件所有的监听器；
+
+​			2）如果同时提供了事件与回调，则只移除这个回调的监听器。
+
+2. 在main.js中使用插件
+
+   ```js
+   Vue.use(VueBus);
+   ```
+
+3. 在组件中使用
+
+   - 子组件*Counter.vue*
+
+     ```vue
+     <template>
+         <div>
+             {{number}}
+             <button @click="handleAddRandom">随机增加</button>
+         </div>
+     </template>
+     
+     <script>
+     export default {
+         props:{
+             number:{
+                 type:Number,
+             }
+         },
+         methods:{
+             handleAddRandom(){
+                 const num = Math.floor(Math.random()*100+1);
+                 this.$bus.emit('add',num);
+             }
+         }
+     }
+     </script>
+     
+     <style scoped></style>
+     ```
+
+   - 父组件*index.vue*
+
+     ```vue
+     <template>
+         <div>
+             <h1>验证中央事件总线插件vue-bus</h1>
+             <Counter :number="number"></Counter>
+         </div>
+     </template>
+     
+     <script>
+     import Counter from "./Counter.vue";
+     export default {
+         components: { Counter },
+         data(){
+             return {
+                 number:0
+             }
+         },
+         created(){
+             this.$bus.on('add',num=>{
+                 this.number+=num;
+             })
+         },
+     }
+     </script>
+     
+     <style scoped></style>
+     ```
+
+4. <u>**注意**</u>
+
+   - ==`$bus.on`应该在created钩子内使用。==如果在<u>*mounted*</u>使用，它可能接收不到其它组件来自<u>*created*</u>钩子内发出的事件。
+
+   - ==因为使用了`$bus.on`，所以在*beforeDestory*钩子里再使用`$bus.off`解除。==。因为组件销毁后，就没必要把监听的句柄储存在*vue-bus*里了。
+
+     ```vue
+     //对index.vue进行改进
+     <template>
+         <div>
+             <h1>验证中央事件总线插件vue-bus</h1>
+             <Counter :number="number"></Counter>
+         </div>
+     </template>
+     
+     <script>
+     import Counter from "./Counter.vue";
+     export default {
+         components: { Counter },
+         data(){
+             return {
+                 number:0
+             }
+         },
+         created(){
+             this.$bus.on('add',this.handleAddRandom);
+         },
+         beforeDestory(){
+             this.$bus.off('add',this.handleAddRandom);
+         },
+         methods:{
+             handleAddRandom(num){
+                 this.number+=num;
+             }
+         }
+     }
+     </script>
+     
+     <style scoped></style>
+     ```
+
+<a id="ajax"></a>
+
+### 实战2：异步获取服务端数据vue-ajax
+
+#### XMLHttpRequest
+
+​	在*JavaScript*中，<u>**XMLHttpRequest**</u> 是客户端的一个 API，它为浏览器与服务器通信提供了一个便捷通道。
+
+##### 概述
+
+1. 创建 XMLHttpRequest 对象
+
+   `var xhr = new XMLHttpRequest();`
+
+2. 建立连接
+
+   在 *JavaScript* 中，使用 *XMLHttpRequest* 对象的 **<u>open()</u>** 方法可以建立一个 HTTP 请求。
+
+   ```js
+   // xhr 表示 XMLHttpRequest 对象，open() 方法包含 5 个参数，说明如下：
+   // method：HTTP 请求方法，必须参数，值包括 POST、GET 和 HEAD，大小写不敏感。
+   // url：请求的 URL 字符串，必须参数，大部分浏览器仅支持同源请求。
+   // async：指定请求是否为异步方式，默认为 true。如果为 false，当状态改变时会立即调用 onreadystatechange 属性指定的回调函数。
+   // username：可选参数，如果服务器需要验证，该参数指定用户名，如果未指定，当服务器需要验证时，会弹出验证窗口。
+   // sword：可选参数，验证信息中的密码部分，如果用户名为空，则该值将被忽略。
+   
+   xhr.open(method, url, async, username, password);
+   ```
+
+3. 发送请求
+
+   建立连接后，可以使用 **<u>send()</u>** 方法发送请求。
+
+   ```js
+   xhr.send(body);
+   
+   //参数 body 表示将通过该请求发送的数据，如果不传递信息，可以设置为 null 或者省略。
+   //发送请求后，可以使用 XMLHttpRequest 对象的 responseBody、responseStream、responseText 或 responseXML 属性等待接收响应数据。
+   ```
+
+##### Js封装ajax请求
+
+- 说明
+
+```js
+/**   
+     * js封装ajax请求   
+     * >>使用new XMLHttpRequest 创建请求对象,所以不考虑低端IE浏览器(IE6及以下不支持XMLHttpRequest)   
+     * >>使用es6语法,如果需要在正式环境使用,则可以用babel转换为es5语法 https://babeljs.cn/docs/setup/#installation   
+     * @param settings 请求参数模仿jQuery ajax   
+     * 调用该方法,data参数需要和请求头Content-Type对应   
+     * Content-Type                        data                                     描述   
+     * application/x-www-form-urlencoded   'name=哈哈&age=12'或{name:'哈哈',age:12}  查询字符串,用&分割   
+     * application/json                    'name=哈哈&age=12'                        json字符串   
+     * multipart/form-data                 new FormData()                           FormData对象,当为FormData类型,不要手动设置Content-Type   
+     *  注意:请求参数如果包含日期类型.是否能请求成功需要后台接口配合   
+     */
+```
+
+- 代码
+
+```js
+const http = {
+    ajax: (settings = {}) => {
+        // 初始化请求参数    
+        let _s = Object.assign({
+            url: '', // string      
+            type: 'GET', // string 'GET' 'POST' 'DELETE'      
+            dataType: 'json', // string 期望的返回数据类型:'json' 'text' 'document' ...      
+            async: true, //  boolean true:异步请求 false:同步请求 required      
+            data: null, // any 请求参数,data需要和请求头Content-Type对应      
+            headers: {}, // object 请求头      
+            timeout: 1000, // string 超时时间:0表示不设置超时      
+            beforeSend: (xhr) => {},
+            success: (result, status, xhr) => {},
+            error: (xhr, status, error) => {},
+            complete: (xhr, status) => {}
+        }, settings);
+        // 参数验证    
+        if (!_s.url || !_s.type || !_s.dataType || !_s.async) { alert('参数有误'); return; }
+        // 创建XMLHttpRequest请求对象    
+        let xhr = new XMLHttpRequest();
+        // 请求开始回调函数    
+        xhr.addEventListener('loadstart', e => { _s.beforeSend(xhr); });
+        // 请求成功回调函数    
+        xhr.addEventListener('load', e => {
+            const status = xhr.status;
+            if ((status >= 200 && status < 300) || status === 304) {
+                let result;
+                if (xhr.responseType === 'text') {
+                    result = xhr.responseText;
+                } else if (xhr.responseType === 'document') {
+                    result = xhr.responseXML;
+                } else {
+                    result = xhr.response;
+                }
+                // 注意:状态码200表示请求发送/接受成功,不表示业务处理成功        
+                _s.success(result, status, xhr);
+            } else {
+                _s.error(xhr, status, e);
+            }
+        });
+        // 请求结束    
+        xhr.addEventListener('loadend', e => {
+            _s.complete(xhr, xhr.status);
+        });
+        // 请求出错    
+        xhr.addEventListener('error', e => {
+            _s.error(xhr, xhr.status, e);
+        });
+        // 请求超时    
+        xhr.addEventListener('timeout', e => {
+            _s.error(xhr, 408, e);
+        });
+
+        let useUrlParam = false;
+        let sType = _s.type.toUpperCase();
+        // 如果是"简单"请求,则把data参数组装在url上    
+        if (sType === 'GET' || sType === 'DELETE') {
+            useUrlParam = true;
+            _s.url += http.getUrlParam(_s.url, _s.data);
+        }
+        // 初始化请求    
+        xhr.open(_s.type, _s.url, _s.async);
+        // 设置期望的返回数据类型    
+        xhr.responseType = _s.dataType;
+        // 设置请求头    
+        for (const key of Object.keys(_s.headers)) {
+            xhr.setRequestHeader(key, _s.headers[key]);
+        }
+        // 设置超时时间    
+        if (_s.async && _s.timeout) {
+            xhr.timeout = _s.timeout;
+        }
+        // 发送请求.如果是简单请求,请求参数应为null.否则,请求参数类型需要和请求头Content-Type对应    
+        xhr.send(useUrlParam ? null : http.getQueryData(_s.data));
+    },
+    // 把参数data转为url查询参数  
+    getUrlParam: (url, data) => {
+        if (!data) {
+            return '';
+        }
+        let paramsStr = data instanceof Object ? http.getQueryString(data) : data;
+        return (url.indexOf('?') !== -1) ? paramsStr : '?' + paramsStr;
+    },
+    // 获取ajax请求参数  
+    getQueryData: (data) => {
+        if (!data) {
+            return null;
+        }
+        if (typeof data === 'string') {
+            return data;
+        }
+        if (data instanceof FormData) {
+            return data;
+        }
+        return http.getQueryString(data);
+    },
+    // 把对象转为查询字符串  
+    getQueryString: (data) => {
+        let paramsArr = [];
+        if (data instanceof Object) {
+            Object.keys(data).forEach(key => {
+                let val = data[key];
+                // todo 参数Date类型需要根据后台api酌情处理        
+                if (val instanceof Date) {
+                    // val = dateFormat(val, 'yyyy-MM-dd hh:mm:ss');       
+                }
+                paramsArr.push(encodeURIComponent(key) + '=' + encodeURIComponent(val));
+            });
+        }
+        return paramsArr.join('&');
+    }
+}
+```
 
 
 
@@ -1006,3 +2054,96 @@ module.exports = config;
 - 实际部署到生产环境时，一般会将*html*挂在后端程序下，由后端路由渲染这个页面，将所有的静态资源*（css、js、image、iconfont等）*单独部署到*[CDN](https://baike.baidu.com/item/CDN/420951)*，当然也可以和后端程序部署在一起，这样就实现了前后端完全分离。
 
 - **ejs**是一个**JavaScript**模板库，用来从*JSON*数据中生成*HTML*字符串，常用于*Node.js*。
+
+
+
+# 实战：知乎日报项目开发
+
+## 跨域限制
+
+- 跨域限制是服务端的一个行为，当开启对某些域名的访问限制后，只有同域或指定域下的页面可以调用，这样相对来说更安全，图片也可以防盗链。
+
+- 跨域限制一般只在浏览器端存在，对于服务端或iOS、Android等客户端是不存在的。
+
+- 使用**<u>代理</u>** 是开发过程中常见的一种解决方案：
+
+  - 使用*npm*安装 request
+
+    `npm install --save-dev request`
+
+  - 创建**<u>proxy.js</u>**文件
+
+    ```js
+    const http = require('http');
+    const request = require('request');
+    
+    const hostname = '127.0.0.1';
+    const port = 8010;
+    const imgPort = 8011;
+    
+    
+    //创建一个API代理服务
+    const apiServer = http.createServer((req, res) => {
+        //知乎日报的接口地址的前缀：http://news-at.zhihu.com/api/4
+        const url = 'http://news-at.zhihu.com/api/4' + req.url;
+        const options = {
+            url: url
+        };
+        function callback(error, response, body) {
+            if (!error && response.statusCode === 200) {
+                //设置编码类型，否则中文会显示为乱码
+                res.setHeader('Content-Type', 'text/plain;charset=UTF-8');
+                //设置所有域允许跨域
+                res.setHeader("Access-Control-Allow-Origin", "*");
+                //返回代理后的内容
+                res.end(body);
+            }
+        }
+        req.get(options, callback);
+    });
+    
+    //监听8010端口
+    apiServer.listen(port, hostname, () => {
+        console.log(`接口代理运行在http://${hostname}:${port}/`);
+    });
+    
+    //创建一个图片代理服务
+    const imgServer = http.createServer((req, res) => {
+        const url = req.url.split('/img/')[1];
+        const options = {
+            url: url,
+            encoding: null
+        }
+        function callback(error, response, body) {
+            const contentType = reponse.headers['contetn-type'];
+            res.setHeader('Content-Type', contentType);
+            res.setHeader('Access-Control-Allow-Origin', "*");
+            res.end(body);
+        }
+        req.get(options, callback);
+    });
+    //监听8011端口
+    imgServer.listen(imgPort, hostname, () => {
+        console.log(`图片代理运行在http://${hostname}:${imgPort}/`);
+    })
+    ```
+
+    - 真实请求接口为 http://news-at.zhihu.com/api/4/news/3892357，开发时改写为 http://127.0.0.1:8010/news/3892357。
+    - 图片的真实地址为 https://pic4.zhimg.com/v2-b44636ccd2affac97ccc0759a0f46f7f.jpg，开发时改写为 http://127.0.0.1:8011/img/https://pic4.zhimg.com/v2-b44636ccd2affac97ccc0759a0f46f7f.jpg。
+
+  - 在终端使用*Node* 启动代理服务
+
+    `node ./proxy.js`
+
+    ![node执行代理](C:\Users\10195\Desktop\笔记\Notes\images\Vue.js\node执行代理.png)
+
+
+
+
+
+
+
+
+
+[^1]:因为普通对象没有Symbol.iterator属性，如果一个对象拥有Symbol.iterator属性，那么就可以使用for...of遍历。
+[^2]:当浏览器加载页面后看到的第一眼的显示内容为首屏。
